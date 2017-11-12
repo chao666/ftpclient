@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+	<meta http-equiv="X-UA-Compatible" content="IE=9" />
+    <meta name="description" content="FTP文件管理" />
+    <meta name="subject" content="FTP文件管理" />
+    <!--<meta name="robots" content="index,follow"/>-->
+    <title>FTP文件管理系统</title>
+    <link rel="me" href="mailto:jchao@ipohai.com"/>
+    <link rel="stylesheet" type="text/css" href="plugin/bootstrap-3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="plugin/font-awesome-4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="plugin/jQuery-contextMenu-2.6.2/jquery.contextMenu.min.css"/>
+    <link rel="stylesheet" type="text/css" href="plugin/scrollbar-plugin-3.1.5/jquery.mCustomScrollbar.min.css"/>
+    <link rel="stylesheet" type="text/css" href="plugin/video-js-6.2.7/video-js.min.css"/>
+    <link rel="stylesheet" type="text/css" href="plugin/jquery-ui-1.12.1/jquery-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="plugin/bootstrap-fileinput-4.4.4/css/fileinput.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+</head>
+<body>
+<!-- 加载屏蔽层 -->
+<div id = "load_mask"><div id = "popload"><img alt="" src="images/567.gif" /></div></div>
+<!-- 最顶层导航栏 -->
+<div id="topNav">
+    <div id="topNavMiddle">
+        <div id="logo">
+            <img src="images/logo.png" />
+        </div>
+        <div id="topTitleTip">
+            <p>FTP客户端</p>
+        </div>
+        <div id="loginServer">
+            <button type="button" class="btn btn-primary" id="loginButton">连接</button>
+        </div>
+    </div>
+
+    <!--<ul class="nav nav-tabs">-->
+    <!--<li class="active myCenter"><a href="javascript:;" class="aCenter">Home</a></li>-->
+    <!--<li class="myCenter"><a href="javascript:;" class="aCenter">服务器</a></li>
+    <li class="myCenter"><a href="javascript:;" class="aCenter">服务器</a></li>
+    <li class="myCenter"><a href="javascript:;" class="aCenter">服务器</a></li>-->
+    <!--<li class="dropdown myCenter" role="presentation">-->
+    <!--<a href="javascript:;" class="dropdown-toggle aCenter topMenuCenter" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">-->
+    <!--选择服务器 <b class="caret"></b>-->
+    <!--</a>-->
+    <!--<ul class="dropdown-menu topMenu">-->
+    <!--<li><a href="javascript:;" name="192.168.17.89">管理服务器</a></li>-->
+    <!--<li class="divider"></li>-->
+    <!--<li><a href="javascript:;" name="192.168.17.89">文件服务器</a></li>-->
+    <!--<li class="divider"></li>-->
+    <!--<li><a href="javascript:;" name="192.168.17.89">资料服务器</a></li>-->
+    <!--<li class="divider"></li>-->
+    <!--<li><a href="javascript:;" name="192.168.17.89">图片服务器</a></li>-->
+    <!--<li class="divider"></li>-->
+    <!--<li><a href="javascript:;" name="192.168.17.89">视频服务器</a></li>-->
+    <!--</ul>-->
+    <!--</li>-->
+    <!--</ul>-->
+</div>
+<div id="ftpBody">
+    <!-- 中间空闲部分 显示目录层级 -->
+    <div id="cataGory">
+        <div id="free">
+            <div>
+                本地服务器
+            </div>
+            <div class="freeUpNext">
+                <i class="fa fa-arrow-circle-left fa-1x"></i>
+                <input class="freeButton" type="hidden" value="" />
+            </div>
+            <div class="freeFolder">
+                <i class="fa fa-folder-open fa-1x"></i>
+                <input class="freeButton" type="hidden" value="" />
+            </div>
+
+            <div class="freeRootPath">
+                <i class="fa fa-caret-right fa-1x"></i>
+            </div>
+            <div class="freeRootPath">
+                <input class="freeButton" type="button" name="" value="/" />
+            </div>
+        </div>
+        <div id="rightfree">
+            <div>
+                远程服务器
+            </div>
+            <div class="freeUpNext">
+                <i class="fa fa-arrow-circle-left fa-1x"></i>
+                <input class="freeButton" type="hidden" value="" />
+            </div>
+            <div class="freeFolder">
+                <i class="fa fa-folder-open fa-1x"></i>
+                <input class="freeButton" type="hidden" value="" />
+            </div>
+
+            <div class="freeRootPath">
+                <i class="fa fa-caret-right fa-1x"></i>
+            </div>
+            <div class="freeRootPath">
+                <input class="freeButton" type="button" name="" value="/" />
+            </div>
+        </div>
+    </div>
+    <!-- 左边菜单导航 右边文件列表mCustomScrollbar mCustomScrollbar scollContent-->
+    <div class="ftpContainer">
+        <div id="rightNav" class="scollContent">
+            <div id="rightContent">
+            </div>
+        </div>
+        <div id="leftNav" class="scollContent">
+            <div id="leftContent">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 上传文件  webkitdirectory -->
+<!--div id="fileUpServer">
+    <input type="file" id="fileUpload" name="fileUpload[]" multiple />
+</div-->
+<!-- 下载文件 -->
+<!--a href="" download="download" id="fileDownloadAhref"><span id="fileDownload"></span></a-->
+
+<!-- 新建文件框 -->
+<div class="modal fade" id="createFileModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="userModalLabel">请输入新建文件名称</h4>
+            </div>
+            <div class="modal-body">
+                <div class = "modal-display-info">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <label class="text-center" for="createName">创建文件名称</label>
+                        </div>
+                        <input type="text" class="form-control" id="createName" placeholder="创建文件名称" maxlength="60" required="required"/>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="cancel" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" id="createName_submit" class="btn btn-primary" data-container="body"  data-trigger="manual" data-placement="right" data-toggle="popover">确认创建</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- FTP连接登录框 -->
+<div class="modal fade" id="ftpLoginModal" tabindex="-1" role="dialog" aria-labelledby="ftpLoginModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id=ftpLoginModalLabel">连接服务器</h4>
+            </div>
+            <div class="modal-body">
+                <form class="bs-example bs-example-form" role="form">
+                    <div class="input-group">
+                        <span class="input-group-addon">主机</span>
+                        <input type="text" id="loginServerName" class="form-control" placeholder="192.168.1.10">
+                    </div>
+                    <p><br></p>
+                    <div class="input-group">
+                        <span class="input-group-addon">用户</span>
+                        <input type="text" id="loginServerUsername" class="form-control" placeholder="admin">
+                    </div>
+                    <p><br></p>
+                    <div class="input-group">
+                        <span class="input-group-addon">密码</span>
+                        <input type="password" id="loginServerPassword" class="form-control" placeholder="******">
+                    </div>
+                    <p><br></p>
+                    <div class="input-group">
+                        <span class="input-group-addon">端口</span>
+                        <input type="number" id="loginServerPort" value="21" class="form-control" placeholder="21">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="ftpLoginCancel" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" id="ftpLogin_submit" class="btn btn-primary" data-container="body" data-trigger="manual" data-placement="right" data-toggle="popover">连接</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- FTP新建文件框 -->
+<div class="modal fade" id="ftpCreateFileModal" tabindex="-1" role="dialog" aria-labelledby="ftpUserModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id=ftpUserModalLabel">请输入新建文件名称</h4>
+            </div>
+            <div class="modal-body">
+                <div class = "modal-display-info">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <label class="text-center" for="ftpCreateName">创建文件名称</label>
+                        </div>
+                        <input type="text" class="form-control" id="ftpCreateName" placeholder="创建文件名称" maxlength="60" required="required"/>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="ftpCancel" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" id="ftpCreateName_submit" class="btn btn-primary" data-container="body" data-trigger="manual" data-placement="right" data-toggle="popover">确认创建</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 重命名输入框 -->
+<div class="modal fade" id="renameFileModal" tabindex="-1" role="dialog" aria-labelledby="renameModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="renameModalLabel">请输入重命名文件名称</h4>
+            </div>
+            <div class="modal-body">
+                <div class = "modal-display-info">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <label class="text-center" for="renameFileName">重命名</label>
+                        </div>
+                        <input type="text" class="form-control" id="renameFileName" placeholder="重命名名称" maxlength="60" required="required"/>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="cancelRenameFile" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" id="renameFileName_submit" class="btn btn-primary" data-container="body" data-trigger="manual" data-placement="right" data-toggle="popover">确认重命名</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- FTP重命名输入框 -->
+<div class="modal fade" id="ftpRenameFileModal" tabindex="-1" role="dialog" aria-labelledby="ftpRenameModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="ftpRenameModalLabel">请输入重命名文件名称</h4>
+            </div>
+            <div class="modal-body">
+                <div class = "modal-display-info">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <label class="text-center" for="ftpRenameFileName">重命名</label>
+                        </div>
+                        <input type="text" class="form-control" id="ftpRenameFileName" placeholder="重命名名称" maxlength="60" required="required"/>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="ftpCancelRenameFile" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" id="ftpRenameFileName_submit" class="btn btn-primary" data-container="body" data-trigger="manual" data-placement="right" data-toggle="popover">确认重命名</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- FTP信息提示框 -->
+<div class="modal fade" id="ftpMessageTipModel" tabindex="-1" role="dialog" aria-labelledby="myFtpModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myFtpModalLabel">信息提示</h4>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="ftpCancelDeleteFile" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="ftpDeleteFile"  data-dismiss="modal">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 信息提示框 -->
+<div class="modal fade" id="messageTipModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">信息提示</h4>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="cancelDeleteFile" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="deleteFile"  data-dismiss="modal">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 信息提示框 -->
+<div class="modal fade" id="compressTipModel" tabindex="-1" role="dialog" aria-labelledby="cpressModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="cpressModalLabel">信息提示</h4>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="cancelCompressFile" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="confirmCompressFile"  data-dismiss="modal">确认压缩</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 图片显示框 -->
+<div class="modal fade" id="imgShowModel" tabindex="-1" role="dialog" aria-labelledby="imgModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 800px;">
+        <div class="modal-content imgShowModelContent">
+            <div class="modal-header">
+                <button type="button" class="close" id="imgShowCancelButton" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="imgModalLabel">文件名称</h4>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <div id="imgBorderStyle">
+                    <img src="" style="max-width: 720px;" title="" id="showImg" />
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+<!-- 视频音频显示框 -->
+<div class="modal fade" id="videoShowModel" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content imgShowModelContent">
+            <div class="modal-header">
+                <button type="button" id="videoPlayerStop" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="videoModalLabel">音视频播放</h4>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <div id="videoBorderStyle"  style="text-align: center;">
+                    <video id="videoPlayer" width="540" height="280"  class="video-js vjs-default-skin" controls preload="auto">
+
+                    </video>
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+<!-- 脚部 -->
+<footer>
+    <div class = "footer">
+        <!--<p><a href="javascript:;">意见反馈</a> | <a href="javascript:;">建议需求</a> | <a href="javascript:;">关于我们</a> | <a href="javascript:;">联系我们</a></p>-->
+        <!--<p>版权所有 &copy; 2015 - 2017</p>
+        <p><a href="http://www.miitbeian.gov.cn/" target="_blank">鲁ICP备15041539号</a></p>
+        <p><a href="http://www.miitbeian.gov.cn/" target="_blank">中华人民共和国工业和信息化部</a></p>-->
+        <div>快乐生活 快乐工作</div>
+    </div>
+</footer>
+</body>
+<!-- 第三方库文件 -->
+<script type="text/javascript" src="plugin/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="plugin/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="plugin/jQuery-contextMenu-2.6.2/jquery.contextMenu.min.js"></script>
+<script type="text/javascript" src="plugin/jQuery-contextMenu-2.6.2/jquery.ui.position.min.js"></script>
+<script type="text/javascript" src="plugin/scrollbar-plugin-3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+<script type="text/javascript" src="plugin/bootstrap-fileinput-4.4.4/js/fileinput.min.js"></script>
+<script type="text/javascript" src="plugin/video-js-6.2.7/video.min.js"></script>
+<script type="text/javascript" src="plugin/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+<!-- 自定义JS -->
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/click.js"></script>
+<script type="text/javascript" src="js/file.js"></script>
+<script type="text/javascript" src="js/player.js"></script>
+<script type="text/javascript" src="js/drag.js"></script>
+<script type="text/javascript" src="js/scroll.js"></script>
+<script type="text/javascript" src="js/ftp.js"></script>
+<script type="text/javascript" src="js/ftpClick.js"></script>
+<!-- 自定义JS初始化 -->
+<script type="text/javascript" src="js/config.js"></script>
+<script type="text/javascript" src="js/InitFile.js"></script>
+</html>

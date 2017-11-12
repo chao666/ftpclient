@@ -1,0 +1,190 @@
+.nav {
+    min-height: 60px;
+}
+.nav .myCenter {
+    height: 60px;
+    display: table;
+}
+.nav .aCenter {
+    display: table-cell;
+    vertical-align: middle;
+    height: 60px;
+}
+#topNav {
+    min-width: 1300px;
+    height: 60px;
+    background-color: #333131;
+    /*border: 1px solid #f04552;*/
+}
+#topNavMiddle {
+    width: 1300px;
+    height: 60px;
+    margin: auto auto;
+}
+#cataGory {
+    width: 1300px;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+#free,#rightfree {
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    height: 35px;
+    width: 620px;
+    border: 1px solid #f0f0f0;
+    color: #1E90ff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+#rightfree {
+    margin-right: 30px;
+}
+.freeButton {
+    background-color: #ffffff;
+    border: 0;
+    font-size: 16px;
+    outline: none;
+}
+.freeUpNext {
+    cursor: pointer;
+}
+.freeRootPath,.freeNextUp,.freeFolder,.freeUpNext,.freePathLevel {
+    margin-left: 16px;
+}
+#leftNav {
+    float: right;
+    width: 620px;
+    /*max-height: 300px;*/
+    /*border-right: solid 1px #d7d7d7;padding-top: 10px;
+    overflow-y: scroll;
+    -ms-overflow-y: scroll;*/
+}
+#leftNav li {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+#rightNav {
+    position: relative;
+    float: left;
+    width: 620px;
+    /*min-height: 300px;*/
+    /*border-left: solid 1px #f0f0f0; margin-top: 10px;*/
+}
+#rightContent,#leftContent {
+    /*display:flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;*/
+    width: 620px;
+    min-height: 800px;
+    border: solid 1px #f0f0f0;
+}
+/*#rightContent {*/
+    /*border-right: solid 1px #f04691;*/
+/*}*/
+/*#leftContent {*/
+    /*border-left: solid 1px #f04691;*/
+/*}*/
+.fileAndDir,.ftpFileAndDir {
+    padding-top: 3px;
+    margin-bottom: 26px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.fileAndDir:hover,.ftpFileAndDir:hover {
+    box-shadow: 0 0 5px black;
+    -moz-box-shadow: 0 0 5px black;
+    -webkit-box-shadow: 0 0 5px black;
+    -o-box-shadow: 0 0 5px black;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    cursor: pointer;
+}
+.menuHome:hover {
+    cursor: pointer;
+}
+.fileName{
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+#fileUpServer {
+    z-index: -1 !important;
+    margin-top: 20px;
+}
+.imgShowModelContent {
+    background-image: url("../images/imgbg1.jpg");
+    background-position: center;
+    background-repeat: repeat;
+    background-size: cover;
+}
+#imgBorderStyle {
+    min-width: 60px;
+    min-height: 60px;
+    padding: 2px 2px;
+    box-shadow: 0 0 2px black;
+    -moz-box-shadow: 0 0 2px black;
+    -webkit-box-shadow: 0 0 2px black;
+    -o-box-shadow: 0 0 2px black;
+}
+#videoBorderStyle {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+/** ftp **/
+#ftpBody {
+    margin: auto auto;
+    padding-top: 3px;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-bottom: 10px;
+    width: 1300px;
+    /*display:flex;*/
+    /*flex-direction: column;*/
+    /*align-items: center;*/
+    /*justify-content: space-between;*/
+    /*border: solid 1px #f0403d;*/
+    overflow: hidden;
+}
+.ftpContainer{
+    margin-top: 6px;
+    width: 1300px;
+    height: 600px;
+    /*display:flex;
+    height: 600px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;*/
+    /** border: solid 1px #f0f0f0;#f0f0f0 overflow: scroll;**/
+}
+.scollContent {
+    width: 650px !important;
+}
+/** 修改tooltip 显示不换行 */
+.tooltip {
+   white-space: nowrap;
+}
+/** 修改文件上传插件 **/
+.file-input {
+    z-index: -1 !important;
+}

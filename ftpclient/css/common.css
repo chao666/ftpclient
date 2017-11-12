@@ -1,0 +1,125 @@
+@CHARSET "UTF-8";
+*{margin:0;padding:0;}
+html{
+    font-family: '宋体';
+    font-size:18px;
+    font-style:normal;
+    font-weight:normal;
+    color:#000;
+    background-color: #fff;
+    padding: 0;
+    margin: 0;
+}
+body {
+    padding: 0;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    background-color:#fff;
+    outline:none;
+    text-decoration: none;
+    overflow-x: scroll;
+}
+a:link,a:active,a:focus,a:visited{color:#CE4300;text-decoration: none;outline:none;}
+a:hover{color:#FF641A;text-decoration:none;cursor:pointer;}
+::selection {background-color: #E13300;color: white;}
+::-moz-selection {background-color: #E13300; color: white;}
+select::-ms-expand {display: none;}
+#logo {
+    text-align: center;
+    vertical-align: middle;
+    width: 60px;
+    height: 60px;
+}
+#logo img {
+    width: 58px;
+    height:58px;
+}
+#topTitleTip,#logo  {
+    float: left;
+    color: #fff;
+}
+#topTitleTip {
+    width: 300px;
+    height:60px;
+    font-size: 23px;
+    font-weight: bold;
+    text-align: center;
+    position: relative;
+}
+#topTitleTip p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -70px;
+    margin-top: -15px;
+}
+#loginServer {
+    position: relative;
+    width: 152px;
+    height: 60px;
+    float: right;
+    /*border: 1px solid #f04552;*/
+    text-align: center;
+}
+#loginButton {
+    position: absolute;
+    top:50%;
+    left:50%;
+    margin-left: -50px;
+    margin-top: -23px;
+    vertical-align: middle;
+    width: 100px;
+    height: 46px;
+    font-size: 18px;
+}
+#load_mask {
+    width:100%;
+    height:100%;
+    position: fixed;
+    left:0;
+    top:0;
+    display:block;
+    /*background-color: rgba(0,0,0,0);
+    opacity:0.8;
+	filter:Alpha(opacity=80);*/
+    background-color:#fff;
+    opacity:0.85;
+    filter:Alpha(opacity=85);
+    z-index:10;
+}
+#popload {
+    width:105px;
+    height:104px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin-top:-52px;
+    margin-left:-52px;
+    z-index:1000;
+}
+footer {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 1300px;
+    height:70px;
+    margin-top:15px;
+    text-align:center;
+    background-color: #333131;
+    color: #fff;
+    font-size: 26px;
+}
+.footer {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding:5px 0;
+    height:auto;
+    min-width:1300px;
+    margin:auto auto;
+    /*border-top: solid 1px #e9e0f0;*/
+}
+footer a:link,footer a:active,footer a:focus,footer a:visited{color:#fff;text-decoration: none;outline:none;}
